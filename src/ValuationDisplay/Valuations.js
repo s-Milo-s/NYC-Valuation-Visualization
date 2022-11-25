@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import Map from './Map.js'
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -123,7 +123,7 @@ export default function Valuation(){
         const keyList = Object.keys(types)
         const toBeChanged = [] 
         for(let i of keyList){
-            if(i[0] == e[0]){
+            if(i[0] === e[0]){
                 toBeChanged.push(i)
             }
         }
