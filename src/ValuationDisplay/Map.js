@@ -1,7 +1,7 @@
 import {useState,useEffect} from 'react';
 import ReactMapGL, {NavigationControl, FullscreenControl} from 'react-map-gl'
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/paper';
+import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import 'mapbox-gl/dist/mapbox-gl.css';
