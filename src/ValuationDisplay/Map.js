@@ -7,7 +7,12 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import DeckGL from '@deck.gl/react';
 import {PolygonLayer} from '@deck.gl/layers';
 import data from './nycZipCodeData/results.json'
-
+import mapboxgl from 'mapbox-gl';
+// The following is required to stop "npm build" from transpiling mapbox code.
+    // notice the exclamation point in the import.
+    // @ts-ignore
+    // eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 export default function Map(props){
     
     const [years, setYears] = useState(["2017/18","2018/19" ])
@@ -140,7 +145,7 @@ export default function Map(props){
     for( let i = 22.5; i<255; i+=22.5){
         let temp = Math.floor(i)
         let hex = rgbToHex(temp,44,84)
-        highScale.push(<Box sx={{position: 'absolute', top: String(pos)+'px', width: "100%",  height: "10px", backgroundColor:hex, zIndex: 10 }}></Box>)
+        highScale.push(<Box key = {hex} sx={{position: 'absolute', top: String(pos)+'px', width: "100%",  height: "10px", backgroundColor:hex, zIndex: 10 }}></Box>)
         pos-=10
     }
     const lowScale = []
@@ -148,7 +153,7 @@ export default function Map(props){
     for( let i = 84; i<255; i+=17.1){
         let temp = Math.floor(i)
         let hex = rgbToHex(0,44,temp)
-        lowScale.push(<Box sx={{position: 'absolute', top: String(pos)+'px', width: "100%",  height: "10px",  backgroundColor:hex, zIndex: 10 }}></Box>)
+        lowScale.push(<Box key = {hex} sx={{position: 'absolute', top: String(pos)+'px', width: "100%",  height: "10px",  backgroundColor:hex, zIndex: 10 }}></Box>)
         pos+=10
     }
     return (
